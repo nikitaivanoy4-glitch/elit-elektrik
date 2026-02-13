@@ -202,4 +202,59 @@ function initNews() {
     )
     .join("");
 }
+// ----------------------
+// АДМИН-ПАНЕЛЬ (упрощённый вход по Telegram ID)
+// ----------------------
+
+const ADMIN_TELEGRAM_ID = "5032819484";
+const ADMIN_LOGIN_KEY = "elit_admin_logged_in";
+
+function initAdminPanel() {
+  const loginBlock = document.getElementById("admin-login");
+  const panelBlock = document.getElementById("admin-panel");
+  const idInput = document.getElementById("admin-id-input");
+  const loginBtn = document.getElementById("admin-login-btn");
+  const logoutBtn = document.getElementById("admin-logout-btn");
+  const statusEl = document.getElementById("admin-login-status");
+
+  if (!loginBlock || !panelBlock) return;
+
+  const isLoggedIn = localStorage.getItem(ADMIN_LOGIN_KEY) === "true";
+  if (isLoggedIn) {
+    loginBlock.style.display = "none";
+    panelBlock.style.display = "grid";
+  }
+
+  if (loginBtn && idInput && statusEl) {
+    loginBtn.addEventListener("click", () => {
+      const value = (idInput.value || "").trim();
+      if (value === ADMIN_TELEGRAM_ID) {
+        localStorage.setItem(ADMIN_LOGIN_KEY, "true");
+        loginBlock.style.display = "none";
+        panelBlock.style.display = "grid";
+        statusEl.textContent = "Успешный вход. Открыта админ‑панель.";
+        statusEl.style.color = "#22c55e";
+      } else {
+        statusEl.textContent = "Неверный ID. Доступ запрещён.";
+        statusEl.style.color = "#f97373";
+      }
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem(ADMIN_LOGIN_KEY);
+      panelBlock.style.display = "none";
+      loginBlock.style.display = "grid";
+      if (statusEl) {
+        statusEl.textContent = "Вы вышли из админ‑панели.";
+        statusEl.style.color = "#9ca3af";
+      }
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initAdminPanel();
+});
 
