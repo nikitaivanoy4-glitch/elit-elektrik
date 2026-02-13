@@ -39,33 +39,22 @@
     <!-- Блок входа -->
     <div id="admin-login" class="settings-grid">
       <article class="settings-card">
-        <h3>Вход администратора</h3>
-        <p>
-          Для входа в личный кабинет используется ваш Telegram‑ID.  
-          ID, который вы указали: <strong>5032819484</strong>.
-        </p>
-        <p style="font-size:12px;color:#9ca3af;">
-          В будущем сюда можно подключить полноценный Telegram Login Widget. Сейчас используется локальная проверка ID.
-        </p>
-        <div style="margin-top:10px;">
-          <div class="form-label">Введите ваш Telegram‑ID</div>
-          <input id="admin-id-input" class="form-input" type="number" placeholder="5032819484">
-        </div>
-        <div class="form-footer" style="margin-top:12px;">
-          <button type="button" class="btn-primary" id="admin-login-btn">Войти</button>
-          <small id="admin-login-status">Доступ только для владельца.</small>
-        </div>
+       <h3>Вход администратора</h3>
+<p>Для входа в личный кабинет введите код администратора.</p>
+
+<div style="margin-top:10px;">
+  <div class="form-label">Код администратора</div>
+  <input id="admin-id-input" class="form-input" type="password" placeholder="Введите код">
+</div>
+
+<div class="form-footer" style="margin-top:12px;">
+  <button type="button" class="btn-primary" id="admin-login-btn">Войти</button>
+  <small id="admin-login-status">Доступ ограничен.</small>
+</div>
+
       </article>
 
-      <article class="settings-card">
-        <h3>Подсказка</h3>
-        <p>
-          Если вы смените Telegram‑аккаунт, нужно будет обновить ID в коде сайта (в файле <code>script.js</code>).
-        </p>
-        <p>
-          Сейчас доступ к админ‑панели есть только у аккаунта с ID <strong>5032819484</strong> (@Vgoga_777).
-        </p>
-      </article>
+      
     </div>
 
     <!-- Блок админ‑панели (появляется после входа) -->
