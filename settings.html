@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Настройки — ЭлитЭлектрик</title>
+  <title>Админ‑панель — ЭлитЭлектрик</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,55 +24,73 @@
 </header>
 
 <main class="main">
-  <section class="page-hero">
-    <div class="page-hero-text">
-      <div class="section-kicker">настройки</div>
-      <h1>Персональные настройки проекта</h1>
-      <p>
-        Здесь в будущем можно реализовать личный кабинет, сохранение расчётов, настройки уведомлений и другие функции.
-        Сейчас это концептуальный раздел, который показывает, что проект может развиваться дальше.
-      </p>
-    </div>
-    <div class="page-hero-image">
-      <img src="images/hero.jpg" alt="Настройки проекта">
-    </div>
-  </section>
-
   <section class="section">
     <div class="section-header">
       <div>
-        <div class="section-kicker">концепция</div>
-        <div class="section-title">Что можно добавить позже</div>
+        <div class="section-kicker">админ‑панель</div>
+        <div class="section-title">Личный кабинет ЭлитЭлектрик</div>
       </div>
       <div class="section-subtitle">
-        Этот раздел можно превратить в личный кабинет клиента или панель управления объектами.
+        Доступ только для владельца. Вход через Telegram‑ID. После входа здесь появятся настройки сайта:
+        тексты, цены, акции, всплывающие окна и контакты.
       </div>
     </div>
 
-    <div class="settings-grid">
+    <!-- Блок входа -->
+    <div id="admin-login" class="settings-grid">
       <article class="settings-card">
-        <h3>Сохранение расчётов</h3>
+        <h3>Вход администратора</h3>
         <p>
-          Возможность сохранять результаты калькулятора, возвращаться к ним и сравнивать разные варианты.
+          Для входа в личный кабинет используется ваш Telegram‑ID.  
+          ID, который вы указали: <strong>5032819484</strong>.
+        </p>
+        <p style="font-size:12px;color:#9ca3af;">
+          В будущем сюда можно подключить полноценный Telegram Login Widget. Сейчас используется локальная проверка ID.
+        </p>
+        <div style="margin-top:10px;">
+          <div class="form-label">Введите ваш Telegram‑ID</div>
+          <input id="admin-id-input" class="form-input" type="number" placeholder="5032819484">
+        </div>
+        <div class="form-footer" style="margin-top:12px;">
+          <button type="button" class="btn-primary" id="admin-login-btn">Войти</button>
+          <small id="admin-login-status">Доступ только для владельца.</small>
+        </div>
+      </article>
+
+      <article class="settings-card">
+        <h3>Подсказка</h3>
+        <p>
+          Если вы смените Telegram‑аккаунт, нужно будет обновить ID в коде сайта (в файле <code>script.js</code>).
+        </p>
+        <p>
+          Сейчас доступ к админ‑панели есть только у аккаунта с ID <strong>5032819484</strong> (@Vgoga_777).
         </p>
       </article>
+    </div>
+
+    <!-- Блок админ‑панели (появляется после входа) -->
+    <div id="admin-panel" class="settings-grid" style="display:none; margin-top:20px;">
       <article class="settings-card">
-        <h3>Уведомления</h3>
-        <p>
-          Настройка уведомлений о статусе работ, выезде мастера, готовности сметы и других событиях.
+        <h3>Общие настройки сайта</h3>
+        <p style="font-size:12px;color:#9ca3af;margin-bottom:8px;">
+          Здесь позже появятся поля для редактирования текстов, цен, контактов и акций без кода.
         </p>
+        <ul style="font-size:13px;margin:0;padding-left:18px;">
+          <li>Тексты на главной странице</li>
+          <li>Список услуг и описания</li>
+          <li>Цены и базовые расценки</li>
+          <li>Контакты и ссылки (телефон, email, Telegram)</li>
+          <li>Настройки всплывающих окон и акций</li>
+        </ul>
       </article>
+
       <article class="settings-card">
-        <h3>История объектов</h3>
-        <p>
-          Хранение истории по каждому объекту: сметы, фото, схемы, акты и гарантийные обязательства.
+        <h3>Статус</h3>
+        <p id="admin-panel-status">
+          Вы успешно вошли как администратор.  
+          В следующем шаге сюда добавим реальные поля для редактирования контента.
         </p>
-      </article>
-      <article class="settings-card">
-        <h3>Интеграции</h3>
-        <p>
-          В будущем сюда можно добавить интеграции с CRM, мессенджерами и другими сервисами.
-        </p>
+        <button type="button" class="btn-ghost" id="admin-logout-btn">Выйти</button>
       </article>
     </div>
   </section>
@@ -88,6 +106,7 @@
     </div>
   </div>
 </footer>
+
+<script src="script.js"></script>
 </body>
 </html>
-
