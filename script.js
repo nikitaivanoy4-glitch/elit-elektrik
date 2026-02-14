@@ -1,21 +1,17 @@
 // ----------------------
-// TELEGRAM: отправка заявок
+// ОТПРАВКА ЗАЯВКИ ЧЕРЕЗ NETLIFY FUNCTION
 // ----------------------
 
-const TOKEN = "8556124225:AAEII3eP3wsXr83y5RIcdnRm9-Yz554wI_g"; // <-- вставь сюда новый токен
-const CHAT_ID = "5832819484";
-const TG_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-function sendToTelegram(message) {
-  fetch(TG_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: message,
-      parse_mode: "HTML"
-    })
-  });
+async function sendToServer(data) {
+  try {
+    await fetch("/.netlify/functions/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.error("Ошибка отправки:", err);
+  }
 }
 
 // ----------------------
@@ -25,19 +21,15 @@ function sendToTelegram(message) {
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("request-form");
   if (form) {
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const name = document.getElementById("name")?.value || "Не указано";
       const phone = document.getElementById("phone")?.value || "Не указано";
+      const description = document.getElementById("description")?.value || "Не указано";
 
-      const message = `
-📩 <b>Новая заявка с сайта</b>
-👤 Имя: ${name}
-📞 Телефон: ${phone}
-      `;
+      await sendToServer({ name, phone, description });
 
-      sendToTelegram(message);
       alert("Заявка отправлена! Мы свяжемся с вами.");
       form.reset();
     });
@@ -266,4 +258,5 @@ function initAdminPanel() {
 
   if (!loginBlock || !panelBlock) return;
 
-  const isLoggedIn = localStorage.getItem(ADMIN_LOGIN_KEY)
+  const isLoggedIn = localStorage.getItem(ADMIN_LOGIN_KEY);
+}
