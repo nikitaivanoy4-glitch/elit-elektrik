@@ -18,23 +18,20 @@ async function sendToServer(data) {
 }
 
 // ----------------------
-// ОБРАБОТКА ФОРМЫ ЗАЯВКИ
+// ОСНОВНОЙ DOMContentLoaded
 // ----------------------
 
 document.addEventListener("DOMContentLoaded", () => {
+  // --- ФОРМА ---
   const form = document.getElementById("request-form");
 
   if (form) {
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      const nameEl = document.getElementById("name");
-      const phoneEl = document.getElementById("phone");
-      const descEl = document.getElementById("description");
-
-      const name = nameEl ? nameEl.value.trim() : "";
-      const phone = phoneEl ? phoneEl.value.trim() : "";
-      const description = descEl ? descEl.value.trim() : "";
+      const name = document.getElementById("name")?.value.trim();
+      const phone = document.getElementById("phone")?.value.trim();
+      const description = document.getElementById("description")?.value.trim();
 
       if (!name || !phone || !description) {
         alert("Пожалуйста, заполните все поля.");
@@ -51,6 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // --- КАЛЬКУЛЯТОР ---
+  initCalc();
+
+  // --- НОВОСТИ ---
+  initNews();
+
+  // --- АДМИНКА ---
+  initAdminPanel();
 });
 
 // ----------------------
@@ -155,3 +161,120 @@ function updateCalc() {
     lines.push(`Щиток: ${formatPrice(PRICES.panel)}`);
   }
 
+  if (needBreakers) {
+    total += PRICES.breaker * 6;
+    lines.push(`Автоматы (примерно 6 шт.): ${formatPrice(PRICES.breaker * 6)}`);
+  }
+
+  if (needRcd) {
+    total += PRICES.rcd * 2;
+    lines.push(`УЗО (примерно 2 шт.): ${formatPrice(PRICES.rcd * 2)}`);
+  }
+
+  if (needVisit) {
+    total += PRICES.visit;
+    lines.push(`Выезд мастера: ${formatPrice(PRICES.visit)}`);
+  }
+
+  if (needDiagnostics) {
+    total += PRICES.diagnostics;
+    lines.push(`Диагностика: ${formatPrice(PRICES.diagnostics)}`);
+  }
+
+  if (objectType === "house") {
+    total = Math.round(total * 1.05);
+  } else if (objectType === "office") {
+    total = Math.round(total * 1.08);
+  }
+
+  const totalEl = document.getElementById("calc-total");
+  const breakdownEl = document.getElementById("calc-breakdown");
+
+  if (totalEl) totalEl.textContent = formatPrice(total);
+  if (breakdownEl) {
+    breakdownEl.innerHTML = lines.length
+      ? lines.map(l => `• ${l}`).join("<br>")
+      : "Выберите услуги и укажите параметры, чтобы увидеть детальный расчёт.";
+  }
+}
+
+function initCalc() {
+  const calcRoot = document.getElementById("elit-calc");
+  if (!calcRoot) return;
+
+  calcRoot.addEventListener("input", updateCalc);
+  calcRoot.addEventListener("change", e => {
+    if (e.target.classList.contains("calc-chip-input")) {
+      const name = e.target.name;
+      document
+        .querySelectorAll(`.calc-chip-input[name="${name}"]`)
+        .forEach(input => {
+          const chip = input.closest(".calc-chip");
+          if (!chip) return;
+          chip.classList.toggle("active", input.checked);
+        });
+    }
+    updateCalc();
+  });
+
+  updateCalc();
+}
+
+// ----------------------
+// НОВОСТИ
+// ----------------------
+
+function initNews() {
+  const newsContainer = document.getElementById("news-dynamic");
+  if (!newsContainer) return;
+
+  const items = [
+    {
+      title: "Новый стандарт по безопасности электромонтажа",
+      date: "Февраль 2026",
+      text: "Мы обновили внутренние регламенты под актуальные требования ПУЭ и ГОСТ, чтобы ваши объекты были максимально защищены."
+    },
+    {
+      title: "Снижение стоимости комплексной разводки",
+      date: "Январь 2026",
+      text: "Для заказов от 80 м² действует пониженный коэффициент на разводку электрики под ключ."
+    },
+    {
+      title: "Расширение команды ЭлитЭлектрик",
+      date: "Декабрь 2025",
+      text: "К нам присоединились новые инженеры-проектировщики с опытом работы на крупных объектах."
+    }
+  ];
+
+  newsContainer.innerHTML = items
+    .map(
+      item => `
+      <article class="news-card">
+        <h3>${item.title}</h3>
+        <small>${item.date}</small>
+        <p>${item.text}</p>
+      </article>
+    `
+    )
+    .join("");
+}
+
+// ----------------------
+// АДМИНКА
+// ----------------------
+
+const ADMIN_TELEGRAM_ID = "5032819484";
+const ADMIN_LOGIN_KEY = "elit_admin_logged_in";
+
+function initAdminPanel() {
+  const loginBlock = document.getElementById("admin-login");
+  const panelBlock = document.getElementById("admin-panel");
+  const idInput = document.getElementById("admin-id-input");
+  const loginBtn = document.getElementById("admin-login-btn");
+  const logoutBtn = document.getElementById("admin-logout-btn");
+  const statusEl = document.getElementById("admin-login-status");
+
+  if (!loginBlock || !panelBlock) return;
+
+  const isLoggedIn = localStorage.getItem(ADMIN_LOGIN_KEY);
+}
