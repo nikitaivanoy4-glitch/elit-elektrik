@@ -1,6 +1,6 @@
 export async function handler(event, context) {
   const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
-  const CHAT_ID = "5832819484";
+  const CHAT_ID = "5032819484";
 
   if (!TELEGRAM_TOKEN) {
     return {
