@@ -2,7 +2,7 @@
 // TELEGRAM: отправка заявок
 // ----------------------
 
-const TOKEN = "8556124225:AAGLAvfo8PnrtPIp0lVxyFWGc3_iAmzIpw8"; // <-- вставь сюда новый токен
+const TOKEN = "8556124225:AAEII3eP3wsXr83y5RIcdnRm9-Yz554wI_g"; // <-- вставь сюда новый токен
 const CHAT_ID = "5832819484";
 const TG_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
