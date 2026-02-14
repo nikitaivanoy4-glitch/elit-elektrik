@@ -54,26 +54,32 @@
       <div class="form-card">
         <div class="section-kicker">заявка</div>
         <div class="section-title" style="font-size:18px;margin-bottom:8px;">Оставить заявку на расчёт</div>
-        <form>
+
+        <!-- 🔥 РАБОЧАЯ ФОРМА -->
+        <form id="request-form">
           <div class="form-row">
             <div>
               <div class="form-label">имя</div>
-              <input class="form-input" type="text" placeholder="Как к вам обращаться">
+              <input id="name" class="form-input" type="text" placeholder="Как к вам обращаться" required>
             </div>
             <div>
               <div class="form-label">телефон</div>
-              <input class="form-input" type="tel" placeholder="+7 ___ ___‑__‑__">
+              <input id="phone" class="form-input" type="tel" placeholder="+7 ___ ___‑__‑__" required>
             </div>
           </div>
+
           <div style="margin-top:10px;">
             <div class="form-label">описание объекта</div>
-            <textarea class="form-textarea" placeholder="Квартира / дом / офис, площадь, примерное количество точек, сроки..."></textarea>
+            <textarea id="description" class="form-textarea" placeholder="Квартира / дом / офис, площадь, количество точек, сроки..." required></textarea>
           </div>
+
           <div class="form-footer">
-            <button type="button" class="btn-primary">Отправить заявку</button>
-            <small>Форма демонстрационная. Для связи используйте телефон или email.</small>
+            <button type="submit" class="btn-primary">Отправить заявку</button>
+            <small>Мы свяжемся с вами в ближайшее время.</small>
           </div>
         </form>
+        <!-- 🔥 КОНЕЦ РАБОЧЕЙ ФОРМЫ -->
+
       </div>
     </div>
   </section>
@@ -89,6 +95,7 @@
     </div>
   </div>
 </footer>
+
+<script src="script.js"></script>
 </body>
 </html>
-
