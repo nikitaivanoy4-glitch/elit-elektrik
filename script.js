@@ -1,4 +1,50 @@
 // ----------------------
+// TELEGRAM: отправка заявок
+// ----------------------
+
+const TOKEN = "8556124225:AAGLAvfo8PnrtPIp0lVxyFWGc3_iAmzIpw8"; // <-- вставь сюда новый токен
+const CHAT_ID = "5832819484";
+const TG_URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+function sendToTelegram(message) {
+  fetch(TG_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: "HTML"
+    })
+  });
+}
+
+// ----------------------
+// ОБРАБОТКА ФОРМЫ ЗАЯВКИ
+// ----------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("request-form");
+  if (form) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name")?.value || "Не указано";
+      const phone = document.getElementById("phone")?.value || "Не указано";
+
+      const message = `
+📩 <b>Новая заявка с сайта</b>
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+      `;
+
+      sendToTelegram(message);
+      alert("Заявка отправлена! Мы свяжемся с вами.");
+      form.reset();
+    });
+  }
+});
+
+// ----------------------
 // КАЛЬКУЛЯТОР ЭЛИТЭЛЕКТРИК
 // ----------------------
 
@@ -202,6 +248,7 @@ function initNews() {
     )
     .join("");
 }
+
 // ----------------------
 // АДМИН-ПАНЕЛЬ (упрощённый вход по Telegram ID)
 // ----------------------
@@ -219,42 +266,4 @@ function initAdminPanel() {
 
   if (!loginBlock || !panelBlock) return;
 
-  const isLoggedIn = localStorage.getItem(ADMIN_LOGIN_KEY) === "true";
-  if (isLoggedIn) {
-    loginBlock.style.display = "none";
-    panelBlock.style.display = "grid";
-  }
-
-  if (loginBtn && idInput && statusEl) {
-    loginBtn.addEventListener("click", () => {
-      const value = (idInput.value || "").trim();
-      if (value === ADMIN_TELEGRAM_ID) {
-        localStorage.setItem(ADMIN_LOGIN_KEY, "true");
-        loginBlock.style.display = "none";
-        panelBlock.style.display = "grid";
-        statusEl.textContent = "Успешный вход. Открыта админ‑панель.";
-        statusEl.style.color = "#22c55e";
-      } else {
-        statusEl.textContent = "Неверный ID. Доступ запрещён.";
-        statusEl.style.color = "#f97373";
-      }
-    });
-  }
-
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem(ADMIN_LOGIN_KEY);
-      panelBlock.style.display = "none";
-      loginBlock.style.display = "grid";
-      if (statusEl) {
-        statusEl.textContent = "Вы вышли из админ‑панели.";
-        statusEl.style.color = "#9ca3af";
-      }
-    });
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  initAdminPanel();
-});
-
+  const isLoggedIn = localStorage.getItem(ADMIN_LOGIN_KEY)
