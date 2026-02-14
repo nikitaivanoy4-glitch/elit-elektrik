@@ -5,7 +5,9 @@
   <title>Админ‑панель — ЭлитЭлектрик</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body class="page">
+
 <header>
   <div class="header-inner">
     <div class="logo-mark">
@@ -23,6 +25,8 @@
   </div>
 </header>
 
+<div class="content">
+
 <main class="main">
   <section class="section">
     <div class="section-header">
@@ -39,25 +43,22 @@
     <!-- Блок входа -->
     <div id="admin-login" class="settings-grid">
       <article class="settings-card">
-       <h3>Вход администратора</h3>
-<p>Для входа в личный кабинет введите код администратора.</p>
+        <h3>Вход администратора</h3>
+        <p>Для входа в личный кабинет введите код администратора.</p>
 
-<div style="margin-top:10px;">
-  <div class="form-label">Код администратора</div>
-  <input id="admin-id-input" class="form-input" type="password" placeholder="Введите код">
-</div>
+        <div style="margin-top:10px;">
+          <div class="form-label">Код администратора</div>
+          <input id="admin-id-input" class="form-input" type="password" placeholder="Введите код">
+        </div>
 
-<div class="form-footer" style="margin-top:12px;">
-  <button type="button" class="btn-primary" id="admin-login-btn">Войти</button>
-  <small id="admin-login-status">Доступ ограничен.</small>
-</div>
-
+        <div class="form-footer" style="margin-top:12px;">
+          <button type="button" class="btn-primary" id="admin-login-btn">Войти</button>
+          <small id="admin-login-status">Доступ ограничен.</small>
+        </div>
       </article>
-
-      
     </div>
 
-    <!-- Блок админ‑панели (появляется после входа) -->
+    <!-- Блок админ‑панели -->
     <div id="admin-panel" class="settings-grid" style="display:none; margin-top:20px;">
       <article class="settings-card">
         <h3>Общие настройки сайта</h3>
@@ -82,8 +83,11 @@
         <button type="button" class="btn-ghost" id="admin-logout-btn">Выйти</button>
       </article>
     </div>
+
   </section>
 </main>
+
+</div> <!-- конец .content -->
 
 <footer>
   <div class="footer-inner">
