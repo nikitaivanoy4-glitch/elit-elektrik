@@ -228,6 +228,35 @@ nav a:hover::after {
   border-color: #fbbf24;
   color: #fbbf24;
 }
+.btn-elite {
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  background: #0f172a;
+  color: #fbbf24;
+  border: 1px solid transparent;
+  background-image:
+    linear-gradient(#0f172a, #0f172a),
+    linear-gradient(135deg, #fbbf24, #f97316);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 18px rgba(251,191,36,0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-elite:hover {
+  box-shadow: 0 0 28px rgba(251,191,36,0.45);
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
 
 .hero-meta {
   font-size: 11px;
