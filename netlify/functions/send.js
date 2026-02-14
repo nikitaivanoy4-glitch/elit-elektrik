@@ -1,6 +1,6 @@
 export async function handler(event, context) {
   const TOKEN = process.env.TELEGRAM_TOKEN; // токен берём из Netlify
-  const CHAT_ID = "ТВОЙ_CHAT_ID"; // сюда вставь свой chat_id
+  const CHAT_ID = "5032819484"; // сюда вставь свой chat_id
 
   const data = JSON.parse(event.body);
 
