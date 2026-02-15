@@ -944,3 +944,113 @@ footer {
     padding: 20px 16px 60px;
   }
 }
+/* ============================
+   MOBILE ADAPTIVE — FULL SITE
+   ============================ */
+
+@media (max-width: 640px) {
+
+  /* Общие отступы */
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  /* Хедер */
+  header {
+    padding: 12px 16px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  nav a {
+    font-size: 14px;
+    padding: 6px 0;
+  }
+
+  /* Заголовки */
+  h1 {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  h2, .section-title {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .section-kicker {
+    font-size: 11px;
+  }
+
+  /* Главные блоки */
+  .page-hero {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .page-hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  /* Контакты */
+  .contacts-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .form-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .form-card .section-title {
+    font-size: 18px;
+    word-break: break-word;
+  }
+
+  .form-label {
+    font-size: 12px;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  /* Калькулятор */
+  .calc-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .calc-chip {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .calc-input {
+    font-size: 14
