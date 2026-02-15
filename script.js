@@ -1,6 +1,6 @@
-// ----------------------
-// ОТПРАВКА ЗАЯВКИ ЧЕРЕЗ NETLIFY FUNCTION
-// ----------------------
+/* ----------------------
+   ОТПРАВКА ЗАЯВКИ ЧЕРЕЗ NETLIFY FUNCTION
+---------------------- */
 
 async function sendToServer(data) {
   try {
@@ -17,9 +17,9 @@ async function sendToServer(data) {
   }
 }
 
-// ----------------------
-// ОСНОВНОЙ DOMContentLoaded
-// ----------------------
+/* ----------------------
+   ОСНОВНОЙ DOMContentLoaded
+---------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- ФОРМА ---
@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initAdminPanel();
 });
 
-// ----------------------
-// КАЛЬКУЛЯТОР ЭЛИТЭЛЕКТРИК
-// ----------------------
+/* ----------------------
+   КАЛЬКУЛЯТОР ЭЛИТЭЛЕКТРИК
+---------------------- */
 
 const PRICES = {
   socket: 350,
@@ -139,7 +139,7 @@ function updateCalc() {
   }
 
   if (chandeliers > 0) {
-    const sum = chandeliers * PRICES.chandelier;
+    const sum = chandeliers * PRRIES.chandelier;
     total += sum;
     lines.push(`Люстры: ${chandeliers} × ${formatPrice(PRICES.chandelier)} = ${formatPrice(sum)}`);
   }
@@ -220,9 +220,9 @@ function initCalc() {
   updateCalc();
 }
 
-// ----------------------
-// НОВОСТИ
-// ----------------------
+/* ----------------------
+   НОВОСТИ
+---------------------- */
 
 function initNews() {
   const newsContainer = document.getElementById("news-dynamic");
@@ -259,9 +259,9 @@ function initNews() {
     .join("");
 }
 
-// ----------------------
-// АДМИНКА
-// ----------------------
+/* ----------------------
+   АДМИНКА
+---------------------- */
 
 const ADMIN_TELEGRAM_ID = "5032819484";
 const ADMIN_LOGIN_KEY = "elit_admin_logged_in";
@@ -277,4 +277,31 @@ function initAdminPanel() {
   if (!loginBlock || !panelBlock) return;
 
   const isLoggedIn = localStorage.getItem(ADMIN_LOGIN_KEY);
+
+  if (isLoggedIn) {
+    loginBlock.style.display = "none";
+    panelBlock.style.display = "grid";
+  }
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", () => {
+      const val = idInput.value.trim();
+
+      if (val === ADMIN_TELEGRAM_ID) {
+        localStorage.setItem(ADMIN_LOGIN_KEY, "1");
+        loginBlock.style.display = "none";
+        panelBlock.style.display = "grid";
+      } else {
+        statusEl.textContent = "Неверный код.";
+      }
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem(ADMIN_LOGIN_KEY);
+      loginBlock.style.display = "grid";
+      panelBlock.style.display = "none";
+    });
+  }
 }
