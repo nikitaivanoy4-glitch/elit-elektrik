@@ -10,11 +10,20 @@
 
 <header>
   <div class="header-inner">
+
     <div class="logo-mark">
       ЭлитЭлектрик
       <span>электрика под ключ</span>
     </div>
 
+    <!-- BURGER (mobile) -->
+    <div class="burger" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- DESKTOP NAV -->
     <nav>
       <a href="index.html">Главная</a>
       <a href="electrics.html">Электрика</a>
@@ -23,8 +32,25 @@
       <a href="settings.html">Настройки</a>
       <a href="contacts.html">Контакты</a>
     </nav>
+
   </div>
 </header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Главная</a>
+  <a href="electrics.html">Электрика</a>
+  <a href="analytics.html">Аналитика</a>
+  <a href="news.html">Новости</a>
+  <a href="settings.html">Настройки</a>
+  <a href="contacts.html">Контакты</a>
+</div>
+
+<!-- FLOATING TELEGRAM BUTTON -->
+<a href="https://t.me/yourtelegram" class="floating-tg">✈️</a>
+
+<!-- MOBILE CALL BUTTON -->
+<a href="tel:+79170059936" class="call-mobile">📞</a>
 
 <main class="main">
 
@@ -54,6 +80,15 @@
         <p>📞 +7 999 297‑77‑73</p>
         <p>✉️ nikitaivanoy4@gmail.com</p>
         <p>Регион: Москва и Московская область</p>
+
+        <br>
+
+        <!-- MAIN TELEGRAM BUTTON FOR CONTACT PAGE -->
+        <a href="https://t.me/yourtelegram" class="btn-elite" style="display:inline-flex;margin-top:6px;">
+          Написать в Telegram
+        </a>
+
+        <br><br>
 
         <small>
           Звонки и сообщения принимаем ежедневно.  
@@ -106,13 +141,21 @@
   <div class="footer-inner">
     <div>© ЭлитЭлектрик, 2026. Электрика под ключ.</div>
     <div class="footer-contacts">
-      <span>📞 +7 917 005‑99‑36</span>
+      <span>📞 +7 917 005-99-36</span>
       <span>📞 +7 999 297‑77‑73</span>
       <span>✉️ nikitaivanoy4@gmail.com</span>
     </div>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  const burger = document.getElementById("burger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  burger.addEventListener("click", () => {
+    mobileMenu.classList.toggle("open");
+  });
+</script>
+
 </body>
 </html>
